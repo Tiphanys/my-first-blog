@@ -1,8 +1,8 @@
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from blog.forms import PostForm
 from .models import Post
-from .forms import PostForm
 
 
 def post_list(request):
@@ -43,7 +43,7 @@ def post_edit(request, pk):
 
 
 def post_draft_list(request):
-    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
+    posts = Post.objects.filter()
     return render(request, 'blog/post_draft_list.html', {'posts': posts})
 
 
@@ -58,5 +58,9 @@ def post_remove(request, pk):
     post.delete()
     return redirect('post_list')
 
+
+def post_image(request):
+    images = Post.objects.filter()
+    return render(request, 'blog/post_image.html', {'posts': images})
 
 
